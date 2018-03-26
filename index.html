@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>CSS Grid for Hunt The Wumpus</title>
+<style>
+html
+{
+   height: 100%;
+   box-sizing: border-box;
+   font-family: sans-serif;
+}
+body 
+{
+  background: white;
+  display: grid;
+  grid-template-areas:  "header header"
+                        "sidebar content"
+                        "footer footer";
+  grid-template-rows:    150px 1fr 100px;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 5px;
+  border: 5px solid white;
+  margin: 0;
+  box-sizing: border-box;
+  height: 100vh;
+}
+body > *
+{
+    padding: 10px;
+}
+article
+{
+  background: dodgerblue;
+  grid-area: content;
+}
+header 
+{
+  background: mediumseagreen;
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: white;
+}
+aside 
+{
+  background: teal;
+  grid-area: sidebar;
+}
+footer 
+{
+  background: gray;
+  grid-area: footer;
+}
+.wumpusIcon
+{
+    width: 111px;
+    height: 120px;
+    margin: 0 25px;
+}
+</style>
+</head>
+<body class="wrapper">
+    <header>
+        <img src="wumpus.jpg" class="wumpusIcon">
+        Hunt The Wumpus
+        <img src="wumpus.jpg" class="wumpusIcon">    
+    </header>
+    <article>game area</article>
+    <aside>difficulties</aside>
+    <footer>webpage info</footer>
+</body>
+</html>
