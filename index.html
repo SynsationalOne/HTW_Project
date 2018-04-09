@@ -29,16 +29,14 @@ body > *
 }
 content#gameBoard
 {
-    background: white;
+    background: dodgerblue;
     padding: 0;
     display: grid;
     grid-area: content;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 content#gameBoard .cell
 {
-    background: url("images/room empty.png");
+    background: url("images/room empty fixed.png");
     background-size: 100% 100%;
 }
 header 
@@ -68,10 +66,10 @@ footer
     margin: 0 25px;
 }
 </style>
-<script>
-window.boardWidth = 5;
-window.boardHeight = 3;
-</script>
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 </head>
 <body class="wrapper">
     <header>
@@ -79,24 +77,21 @@ window.boardHeight = 3;
         Hunt The Wumpus
         <img src="images/wumpus on clr bgd.png" class="wumpusIcon">
     </header>
-    <content id="gameBoard">
-        <div class="cell" id="cell0"></div>
-        <div class="cell" id="cell1"></div>
-        <div class="cell" id="cell2"></div>
-        <div class="cell" id="cell3"></div>
-        <div class="cell" id="cell4"></div>
-        <div class="cell" id="cell5"></div>
-        <div class="cell" id="cell6"></div>
-        <div class="cell" id="cell7"></div>
-        <div class="cell" id="cell8"></div>
-        <div class="cell" id="cell9"></div>
-        <div class="cell" id="cell10"></div>
-        <div class="cell" id="cell11"></div>
-        <div class="cell" id="cell12"></div>
-        <div class="cell" id="cell13"></div>
-        <div class="cell" id="cell14"></div>
-    </content>
+    <content id="gameBoard"></content>
     <aside>difficulties</aside>
     <footer>webpage info</footer>
 </body>
+<script>
+window.boardWidth = 12;
+window.boardHeight = 4;
+let rows = "1fr ".repeat(boardHeight);
+let cols = "1fr ".repeat(boardWidth);
+for(index=0; index<boardWidth*boardHeight; index++)
+{
+    $("#gameBoard").append("<div class='cell' id='cell" + index + "'></div>");
+}
+$("#gameBoard").css("gridTemplateColumns", cols);
+$("#gameBoard").css("gridTemplateRows", rows);
+$("#cell13").css("background-image", "url('images/elbow hallways fixed.png')");
+</script>
 </html>
