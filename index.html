@@ -36,7 +36,6 @@ content#gameBoard
 }
 content#gameBoard .cell
 {
-    background: url("images/room empty fixed.png");
     background-size: 100% 100%;
 }
 header 
@@ -73,9 +72,9 @@ footer
 </head>
 <body class="wrapper">
     <header>
-        <img src="images/wumpus on clr bgd.png" class="wumpusIcon">
+        <img src="images/wumpus logo.png" class="wumpusIcon">
         Hunt The Wumpus
-        <img src="images/wumpus on clr bgd.png" class="wumpusIcon">
+        <img src="images/wumpus logo.png" class="wumpusIcon">
     </header>
     <content id="gameBoard"></content>
     <aside>difficulties</aside>
@@ -84,14 +83,58 @@ footer
 <script>
 window.boardWidth = 12;
 window.boardHeight = 4;
+window.ICONS = 
+    {"mt":"images/room empty.png",
+    "slime":"images/slime.png",
+    "ne":"images/elbow hallway ne.png",
+    "nw":"images/elbow hallway nw.png",
+    "sw":"images/elbow hallway sw.png",
+    "se":"images/elbow hallway se.png",
+    "pit":"images/pit.png",
+    "bat":"images/bat.png",
+    "wumpus":"images/wumpus.png",
+    "avgirl":"images/avatar girl.png",
+    "avboy":"images/avatar boy.png"};
+window.boardTiles = [];
 let rows = "1fr ".repeat(boardHeight);
 let cols = "1fr ".repeat(boardWidth);
 for(index=0; index<boardWidth*boardHeight; index++)
 {
     $("#gameBoard").append("<div class='cell' id='cell" + index + "'></div>");
 }
+function PaintTile(row, col)
+{
+    let pos = row*boardWidth+col;
+    let cssValue = [];
+    for(let tile in boardTiles[pos])
+    {
+        cssValue.push("url('" + ICONS[tile] + "')");
+    }
+    $("#cell" + pos).css("background-image", cssValue.join());
+}
+function ReplaceTile(row, col, tiles)
+{
+    boardTiles[row*boardWidth+col] = {};
+    AddTile(row, col, tiles);
+}
+function AddTile(row, col, tiles)
+{
+    if(ICONS[tiles]) { tiles = [tiles]; }
+    for(let tile in tiles)
+    {
+       boardTiles[row*boardWidth+col][tiles[tile]] = true;
+    }
+    PaintTile(row, col);
+}
 $("#gameBoard").css("gridTemplateColumns", cols);
 $("#gameBoard").css("gridTemplateRows", rows);
-$("#cell13").css("background-image", "url('images/elbow hallways fixed.png')");
+ReplaceTile(3,5,"bat");
+ReplaceTile(1,2,"avgirl");
+//AddTile(1,1,"wumpus"); 
+let col = 0;
+for(let tile in ICONS)
+{
+    ReplaceTile(0,col++,tile);
+}
 </script>
 </html>

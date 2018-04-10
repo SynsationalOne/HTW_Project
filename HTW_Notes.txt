@@ -1,0 +1,6 @@
+Outstanding bugs
+
+line 133 that calls AddTile somehow causes the whole first row to stop rendering
+
+design flaw or hasn't been designed yet... need a way to control the stacking order
+    fyi: the css will display tiles closets to farthest order
