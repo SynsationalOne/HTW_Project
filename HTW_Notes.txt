@@ -1,5 +1,5 @@
 Need to build a data structure to keep track of the hidden parts of the maze
-
+Bug: Trying to address past the limits of the map makes thing odd
 X Outstanding bugs
 X line 133 that calls AddTile somehow causes the whole first row to stop rendering
 X design flaw or hasn't been designed yet... need a way to control the stacking order

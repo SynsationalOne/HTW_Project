@@ -81,8 +81,9 @@ footer
     <footer>webpage info</footer>
 </body>
 <script>
-window.boardWidth = 12;
+window.boardWidth = 6;
 window.boardHeight = 4;
+window.boardWidthPX = window.boardHeightPX = 0;
 window.ICONS = 
     {"mt":"images/room empty.png",
     "slime":"images/slime.png",
@@ -127,8 +128,24 @@ function AddTile(row, col, tiles)
     }
     PaintTile(row, col);
 }
+function MonitorSize()
+{
+    if($("#gameBoard").outerWidth() != boardWidthPX || 
+        $("#gameBoard").outerHeight() != boardHeightPX)
+    {
+        boardWidthPX = $("#gameBoard").outerWidth();
+        boardHeightPX = $("#gameBoard").outerHeight();
+        $("#gameBoard").css("padding", 
+            Math.max(0, (boardHeightPX-boardWidthPX/boardWidth*boardHeight) / 2)
+            + "px " 
+            + Math.max(0, (boardWidthPX-boardHeightPX*boardWidth/boardHeight) / 2)
+            + "px");
+    }
+    setTimeout("MonitorSize()", 300);
+}
 $("#gameBoard").css("gridTemplateColumns", cols);
 $("#gameBoard").css("gridTemplateRows", rows);
+MonitorSize();
 ReplaceTile(3,5,"bat");
 AddTile(1,1,"wumpus");
 AddTile(1,1,"mt");
